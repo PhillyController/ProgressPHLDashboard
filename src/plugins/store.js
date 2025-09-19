@@ -79,8 +79,11 @@ const geojsonSourceConfig = [
 ];
 
 // s3 URL
-const VERSION = "2";
-const S3_URL = `https://spi-dashboard-data.s3.amazonaws.com/v${VERSION}`;
+const VERSION = "3";
+const BRANCH = "version-3";
+const REPO =
+  "https://raw.githubusercontent.com/PhillyController/progressphl-data";
+const DATA_URL = `${REPO}/${BRANCH}/data-products/dashboard-inputs/v${VERSION}`;
 
 export default new Vuex.Store({
   state: {
@@ -156,7 +159,7 @@ export default new Vuex.Store({
      * Fetch SPI data
      */
     fetchSPIData(store) {
-      return json(`${S3_URL}/spi-data.json`).then((data) => {
+      return json(`${DATA_URL}/spi-data.json`).then((data) => {
         store.commit("setValue", { value: data, key: "data" });
         return data;
       });
@@ -166,7 +169,7 @@ export default new Vuex.Store({
      * Fetch SPI metadata
      */
     fetchSPIMetadata(store) {
-      return json(`${S3_URL}/spi-metadata.json`).then((data) => {
+      return json(`${DATA_URL}/spi-metadata.json`).then((data) => {
         store.commit("setValue", { value: data, key: "metadata" });
         return data;
       });
@@ -231,7 +234,7 @@ export default new Vuex.Store({
      * Fetch indicators data
      */
     fetchIndicatorsData(store, { name }) {
-      const url = `${S3_URL}/census-data/${name}.json`;
+      const url = `${DATA_URL}/census-data/${name}.json`;
       return json(url).then((data) => {
         store.commit("setValue", {
           value: data,
@@ -245,7 +248,7 @@ export default new Vuex.Store({
      * Fetch trends data
      */
     fetchTrendsData(store, { variable }) {
-      const url = `${S3_URL}/trends/${variable}.json`;
+      const url = `${DATA_URL}/trends/${variable}.json`;
       return json(url).then((data) => {
         store.commit("setValue", {
           value: data,

@@ -189,9 +189,17 @@ export default {
      * Allows for fast color setting in the map
      */
     selectedMapData() {
+      // Defensive: avoid calling d3.group on undefined
+      if (!this.data || !this.metadata || !Array.isArray(this.variableNames)) {
+        return new Map();
+      }
+
       let i = this.displayVariableNames.indexOf(this.displayedVariableName);
+      if (i < 0) return new Map();
+
       let key = this.variableNames[i];
-      return group(this.data[key], (d) => d.geoid);
+      const arr = key && Array.isArray(this.data[key]) ? this.data[key] : [];
+      return group(arr, (d) => d.geoid);
     },
   },
 

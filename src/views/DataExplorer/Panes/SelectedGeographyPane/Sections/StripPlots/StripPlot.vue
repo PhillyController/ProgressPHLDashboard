@@ -1,5 +1,5 @@
 <template>
-  <div :id="id" class="tw-text-base"></div>
+  <div v-if="data" :id="id" class="tw-text-base"></div>
 </template>
 
 <script>
@@ -20,7 +20,8 @@ export default {
      */
     data: {
       type: Array,
-      required: true,
+      required: false,
+      default: () => [],
     },
 
     /**
@@ -28,7 +29,7 @@ export default {
      */
     focusedIds: {
       type: Array,
-      default: null,
+      default: () => [],
     },
 
     hoveredId: {
@@ -110,7 +111,7 @@ export default {
      * Whether to show the label with values
      */
     showLabels() {
-      return this.focusedIds.length == 1;
+      return Array.isArray(this.focusedIds) && this.focusedIds.length === 1;
     },
 
     /**
