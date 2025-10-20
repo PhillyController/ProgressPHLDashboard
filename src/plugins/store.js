@@ -80,7 +80,7 @@ const geojsonSourceConfig = [
 
 // s3 URL
 const VERSION = "3";
-const BRANCH = "version-3";
+const BRANCH = "main";
 const REPO =
   "https://raw.githubusercontent.com/PhillyController/progressphl-data";
 const DATA_URL = `${REPO}/${BRANCH}/data-products/dashboard-inputs/v${VERSION}`;
